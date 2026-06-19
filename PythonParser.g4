@@ -6,10 +6,10 @@ options { tokenVocab=PythonLexer; }
 // Regra inicial: o código é uma lista de instruções que termina no fim do ficheiro
 code: stat* EOF;
 
-// Uma instrução (stat) agora aceita expressões matemáticas OU consultas booleanas [1]
+// Uma instrução (stat) agora aceita expressões matemáticas OU consultas booleanas
 stat: (expr | query) '\n';
 
-// NOVA REGRA: Definição de lógica booleana e comparações [1]
+// NOVA REGRA: Definição de lógica booleana e comparações 
 query: TRUE                            # valoresBooleanos
      | FALSE                           # valoresBooleanos
      | NOT query                       # operacoesBooleanas
@@ -18,7 +18,7 @@ query: TRUE                            # valoresBooleanos
      | expr (EQ | NE | GT | LT | GE | LE) expr # relacoesEntreExpressoes
      ;
 
-// Definição de expressões (Fase 3) [3]
+// Definição de expressões
 expr: ID                            # ids
     | INT                           # numeros
     | FLOAT                         # numeros
