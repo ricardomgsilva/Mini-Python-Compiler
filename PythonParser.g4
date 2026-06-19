@@ -2,19 +2,22 @@ parser grammar PythonParser;
 
 options { tokenVocab=PythonLexer; }
 
-
-code: (stat | condicional | func | func_call)* EOF;
+code: (stat | condicional | func | func_call | loop_while | loop_for)* EOF;
 
 stat: (expr | query) '\n';
+
+// NOVA REGRA: Estrutura de repetição while
+loop_while: WHILE query COLON stat # loopWhile;
+
+// NOVA REGRA: Estrutura de repetição for
+loop_for: FOR ID IN expr COLON stat # loopFor;
 
 condicional: IF query COLON stat                      # ifSimples
            | IF query COLON stat ELSE COLON stat      # ifElse
            | IF query COLON stat (ELIF query COLON stat)+ ELSE COLON stat # ifElifElse
            ;
 
-
 func: DEF ID L_PAREN (ID (COMMA ID)*)? R_PAREN COLON stat # definicaoFuncao;
-
 
 func_call: ID L_PAREN (expr (COMMA expr)*)? R_PAREN # chamadaFuncao;
 
