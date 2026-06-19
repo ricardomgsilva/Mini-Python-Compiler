@@ -72,7 +72,7 @@ FLOAT: DIGITO+ '.' DIGITO* | '.' DIGITO+;
 
 STRING: '"' .*? '"' | '\'' .*? '\'';
 LISTA: '[' .*? ']';
-//TUPLA: '(' .*? ')';
+TUPLA: '(' .*? ')';
 SET: '{' .*? '}';
 DICTIONARY: '{' .*? ':' .*? '}';
 
