@@ -2,17 +2,21 @@ parser grammar PythonParser;
 
 options { tokenVocab=PythonLexer; }
 
-// Fase 5: O código agora aceita instruções simples ou blocos condicionais
-code: (stat | condicional)* EOF;
 
-// Instrução simples
+code: (stat | condicional | func | func_call)* EOF;
+
 stat: (expr | query) '\n';
 
-// NOVA REGRA: Estruturas de decisão (if, elif, else)
 condicional: IF query COLON stat                      # ifSimples
            | IF query COLON stat ELSE COLON stat      # ifElse
            | IF query COLON stat (ELIF query COLON stat)+ ELSE COLON stat # ifElifElse
            ;
+
+
+func: DEF ID L_PAREN (ID (COMMA ID)*)? R_PAREN COLON stat # definicaoFuncao;
+
+
+func_call: ID L_PAREN (expr (COMMA expr)*)? R_PAREN # chamadaFuncao;
 
 query: TRUE                            # valoresBooleanos
      | FALSE                           # valoresBooleanos
@@ -25,6 +29,7 @@ query: TRUE                            # valoresBooleanos
 expr: ID                            # ids
     | INT                           # numeros
     | FLOAT                         # numeros
+    | func_call                     # chamadaFuncaoNaExpressao
     | expr (MULT|DIV|PLUS|MINUS) expr # operacoesComExpressoes
     | L_PAREN expr R_PAREN          # expressoesEntreParenteses
     ;
