@@ -67,6 +67,9 @@ L_BRACE: '{';
 R_BRACE: '}';
 COMMA: ',';
 
+INT: DIGITO+;
+FLOAT: DIGITO+ '.' DIGITO* | '.' DIGITO+;
+
 // REGRAS OBRIGATÓRIAS DE FINAL DE FICHEIRO
 ID: [a-zA-Z_] [a-zA-Z0-9_]*;
 
