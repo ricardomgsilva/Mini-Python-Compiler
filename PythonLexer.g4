@@ -70,6 +70,12 @@ COMMA: ',';
 INT: DIGITO+;
 FLOAT: DIGITO+ '.' DIGITO* | '.' DIGITO+;
 
+STRING: '"' .*? '"' | '\'' .*? '\'';
+LISTA: '[' .*? ']';
+TUPLA: '(' .*? ')';
+SET: '{' .*? '}';
+DICTIONARY: '{' .*? ':' .*? '}';
+
 // REGRAS OBRIGATÓRIAS DE FINAL DE FICHEIRO
 ID: [a-zA-Z_] [a-zA-Z0-9_]*;
 
