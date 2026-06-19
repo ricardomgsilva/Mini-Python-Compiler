@@ -72,7 +72,7 @@ FLOAT: DIGITO+ '.' DIGITO* | '.' DIGITO+;
 
 STRING: '"' .*? '"' | '\'' .*? '\'';
 LISTA: '[' .*? ']';
-TUPLA: '(' .*? ')';
+//TUPLA: '(' .*? ')';
 SET: '{' .*? '}';
 DICTIONARY: '{' .*? ':' .*? '}';
 
@@ -85,4 +85,4 @@ fragment LETRA: [a-zA-Z];
 
 fragment DIGITO: [0-9];
 
-WS: [ \t]+ -> skip;
+WS: [ \t\r]+ -> skip;

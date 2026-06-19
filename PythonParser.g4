@@ -4,7 +4,7 @@ options { tokenVocab=PythonLexer; }
 
 code: (stat | condicional | func | func_call | loop_while | loop_for)* EOF;
 
-stat: (expr | query) '\n';
+stat: (expr | query) NL;
 
 // NOVA REGRA: Estrutura de repetição while
 loop_while: WHILE query COLON stat # loopWhile;
