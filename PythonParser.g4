@@ -1,15 +1,19 @@
 parser grammar PythonParser;
 
-// Indica ao Parser para usar os tokens definidos no seu Lexer
 options { tokenVocab=PythonLexer; }
 
-// Regra inicial: o código é uma lista de instruções que termina no fim do ficheiro
-code: stat* EOF;
+// Fase 5: O código agora aceita instruções simples ou blocos condicionais
+code: (stat | condicional)* EOF;
 
-// Uma instrução (stat) agora aceita expressões matemáticas OU consultas booleanas
+// Instrução simples
 stat: (expr | query) '\n';
 
-// NOVA REGRA: Definição de lógica booleana e comparações 
+// NOVA REGRA: Estruturas de decisão (if, elif, else)
+condicional: IF query COLON stat                      # ifSimples
+           | IF query COLON stat ELSE COLON stat      # ifElse
+           | IF query COLON stat (ELIF query COLON stat)+ ELSE COLON stat # ifElifElse
+           ;
+
 query: TRUE                            # valoresBooleanos
      | FALSE                           # valoresBooleanos
      | NOT query                       # operacoesBooleanas
@@ -18,7 +22,6 @@ query: TRUE                            # valoresBooleanos
      | expr (EQ | NE | GT | LT | GE | LE) expr # relacoesEntreExpressoes
      ;
 
-// Definição de expressões
 expr: ID                            # ids
     | INT                           # numeros
     | FLOAT                         # numeros
