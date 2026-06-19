@@ -76,6 +76,8 @@ TUPLA: '(' .*? ')';
 SET: '{' .*? '}';
 DICTIONARY: '{' .*? ':' .*? '}';
 
+NL: '\n';
+
 // REGRAS OBRIGATÓRIAS DE FINAL DE FICHEIRO
 ID: [a-zA-Z_] [a-zA-Z0-9_]*;
 
@@ -83,4 +85,4 @@ fragment LETRA: [a-zA-Z];
 
 fragment DIGITO: [0-9];
 
-WS: [ \t\r\n]+ -> skip;
+WS: [ \t]+ -> skip;
